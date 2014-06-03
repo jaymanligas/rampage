@@ -78,15 +78,31 @@ app.directive('debug', function() {
 app.controller('AlbumsCtrl', ['$scope','$location','$http','Facebook',function($scope,$location,$http,Facebook) {
     $scope.selectedAlbum = {};
     $scope.albums = {};
+    $scope.profilepic = {};
    $scope.IntentLogin = function() {
     Facebook.getLoginStatus(function(response) {
       if (response.status == 'connected') {
         
-       
+         Facebook.api('/me', function(response) {
+          $scope.$apply(function() {
+            // Here you could re-check for user status (just in case)
+            $scope.user = response;
+            console.log(response)
+          });
+        });
+
+         Facebook.api('/me/picture', function(response) {
+          $scope.$apply(function() {
+            // Here you could re-check for user status (just in case)
+            $scope.profilepic = response.data;
+            console.log(response)
+          });
+        });
+
+        
 
         $http.get('resources/photos.json').success(function(res){
-              console.log("xxx");
-              console.log(res);
+              
               $scope.albums = res.data;
         });
       }
@@ -130,7 +146,6 @@ app.controller('AuthenticationCtrl', ['$scope','$http', '$location', 'Facebook',
     Facebook.getLoginStatus(function(response) {
       if(response.status == 'connected') {
         $scope.me(); 
-        
         $scope.$apply(function() {
           $scope.loggedIn = true;
           $location.url('/album');
