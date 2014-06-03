@@ -90,8 +90,13 @@ app.controller('AlbumsCtrl', ['$scope','$location','$http','Facebook',function($
               $scope.albums = res.data;
         });
       }
-      else
-        $location.url('/login');
+      else {
+        $scope.$apply(function(){
+            $location.url('/login');
+
+        })
+        
+      }
     });
   };
   $scope.IntentLogin();
@@ -103,13 +108,13 @@ app.controller('AlbumsCtrl', ['$scope','$location','$http','Facebook',function($
 
 }]);
 
-app.controller('AuthenticationCtrl', ['$scope','$http', 'Facebook',function($scope,$http, Facebook) {
+app.controller('AuthenticationCtrl', ['$scope','$http', '$location', 'Facebook',function($scope,$http,$location, Facebook) {
 
   $scope.loggedIn = false;
   $scope.user = {};
   $scope.photos = {};
 
-  var something = "access_token=CAACEdEose0cBAHM0BboGhZASK9Jr5GshpNAq1AZAQPYjxqjLfPwJz3TxfDJ3yjEZACjyQUQpEnDZBxuM3gU18sZBeFd3TsJEM9pE6U1Tcuzit4p8GZBvaSt7Bf8lmXYvpWMDcgVVzXJRiOBLcPZAI0ECGIAudxiaLuGnkZBoVcz4uY0ObnflfUic1QU4OcCFQvcZCgOfSz5EYHwZDZD";
+  
   
 
   // Here, usually you should watch for when Facebook is ready and loaded
@@ -128,7 +133,7 @@ app.controller('AuthenticationCtrl', ['$scope','$http', 'Facebook',function($sco
         
         $scope.$apply(function() {
           $scope.loggedIn = true;
-          
+          $location.url('/album');
          
         });
       }else{
