@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <ul>
+          <li ng-repeat="album in albums" class="album-list" >
+             <a href="" ng-click="selectAlbum(album)">
+              <div class="text">{{album.name}}</div>
+           
+              
+              <img src="{{album.photos.data[0].source}}" class="small-img img-thumbnail"/>
+            </a>
+          </li>
+        </ul>
+
+        <ul>
+          <li ng-repeat="photo in selectedAlbum">
+              <img src="{{photo.source}}" />
+              <br>{{photo.name}}  
+          </li>
+        </ul>
+
+
+    </div>
+  </div>
+</div>

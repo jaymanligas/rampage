@@ -1,0 +1,22 @@
+<div class="container>
+
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          facebookReady: {{facebookReady}}
+          loggedIn: {{loggedIn}}
+          	
+          <div>
+            <div class="alert alert-info">Hello, {{user.name}}</div>
+            <div class="alert alert-warning" data-ng-show="byebye">Bye bye :'(</div>
+          </div>
+          
+          <button type="button" class="btn btn-primary btn-large" ng-show="!loggedIn" data-ng-disabled="!facebookReady" data-ng-click="login()">Login with Facebook</button>
+          <button type="button" class="btn btn-danger btn-large" ng-show="loggedIn" data-ng-disabled="!facebookReady" data-ng-click="logout()">Logout</button>
+          
+         <!--  <div>
+            <debug val="user"></debug>
+          </div> -->
+          
+        </div>
+      </div>
+    </div>
